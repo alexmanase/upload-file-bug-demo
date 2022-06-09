@@ -1,10 +1,10 @@
 <div>
     <form wire:submit.prevent="save">
-        <input type="file" wire:model="photo">
+        <input type="file" wire:model="image">
 
         <br />
 
-        @error('photo') <span class="error">{{ $message }}</span> @enderror
+        @error('image') <span class="error">{{ $message }}</span> @enderror
 
         <br />
 
