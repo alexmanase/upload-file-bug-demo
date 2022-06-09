@@ -6,24 +6,25 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
-class WithFileUploader extends Component implements HasForms
+class WithFileUploader extends Component
 {
-    use InteractsWithForms;
+    use WithFileUploads;
 
     public $image;
-
-    protected function getFormSchema(): array
-    {
-        return [
-            FileUpload::make('image')
-                ->label('Featured Image')
-                ->maxSize(1000000)
-        ];
-    }
 
     public function render()
     {
         return view('livewire.with-file-uploader');
+    }
+
+    public function save()
+    {
+        $this->validate([
+            'image' => 'image|max:10240', // 10MB Max
+        ]);
+
+        logger($this->image);
     }
 }
